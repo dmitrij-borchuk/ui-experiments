@@ -1,0 +1,36 @@
+.select-alpha .drop-items-container {
+  transition: height 0.3s;
+  transition-timing-function: cubic-bezier(.27,.75,.36,1.32);
+  margin-right: -46px;
+}
+
+.select-alpha .selected-value {
+  height: 50px;
+}
+
+.select-alpha .drop-item {
+  height: 50px;
+}
+
+.select-alpha .drop-item-text {
+  height: 50px;
+  transition: transform 0.3s;
+}
+
+.select-alpha .drop-item-text:not(.opened) {
+  transform: translate(0px, 0px);
+}
+
+.select-alpha .drop-item-text.opened {
+  transform: translate(0px, 10px);
+}
+
+.select-alpha .animate-transform-03 {
+  transition: transform 0.3s;
+}
+.select-alpha .make-clear-icon-top {
+  transform: translate(0px, 9px);
+}
+.select-alpha .make-clear-icon-bottom {
+  transform: translate(0px, -9px);
+}
