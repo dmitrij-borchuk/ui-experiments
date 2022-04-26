@@ -10,17 +10,13 @@ export const ListAlpha = (props: ISelectBoxAlphaProps) => {
   const [selectedRect, setSelectedRect] = useState<IPositioning>()
   const onItemClick = (item: IData, e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect()
-    const { top } = rect
-    console.log('=-= top', top)
     setSelectedItem(item)
     setSelectedRect(rect)
   }
-  console.log('=-= selectedItem', selectedItem)
   const onFullScreenAnimEnd = (
     e: TransitionEvent<HTMLDivElement>,
     isFullScreen: boolean
   ) => {
-    console.log('=-= isFullScreen', isFullScreen)
     if (!isFullScreen) {
       setSelectedItem(undefined)
       setReverse(false)
@@ -91,6 +87,7 @@ interface IItemProps {
 }
 export const Item: React.FC<IItemProps> = (props) => {
   const { text, onClick, className, style, fullHeight = false } = props
+  console.log('=-= fullHeight', fullHeight)
   return (
     <div
       className={cn(className, 'list-item-alpha mb-2 p-3 flex', {
@@ -100,7 +97,12 @@ export const Item: React.FC<IItemProps> = (props) => {
       style={style}
     >
       <Image />
-      <div className="ml-2 color-2 h-20 overflow-hidden leading-relaxed">
+      <div
+        className={cn(
+          'ml-2 color-2 h-20 overflow-hidden leading-relaxed',
+          fullHeight ? 'h-full' : 'h-20'
+        )}
+      >
         {text}
       </div>
     </div>
