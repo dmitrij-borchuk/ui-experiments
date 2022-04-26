@@ -75,7 +75,9 @@ export const FullScreenResizer: React.FC<IFullScreenResizerProps> = (props) => {
         width: currentPosition.width,
         height: currentPosition.height,
         left: currentPosition.left,
-        transition: `top ${time}, width ${time}, left ${time}, height ${time}`,
+        transitionTimingFunction: 'cubic-bezier(.06,.52,0,1.01)',
+        transitionDuration: `${time}, ${time}, ${time}, ${time}`,
+        transitionProperty: `top, width, left, height`,
       }}
     >
       {children}
