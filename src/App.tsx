@@ -1,21 +1,19 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
-import './App.css';
-import { SelectBoxAlphaPage } from './experiments/select-box-alpha';
-import { ListPage } from './experiments/list-alpha';
+import React from 'react'
+import { BrowserRouter, Route, Link, Routes } from 'react-router-dom'
+import './App.css'
+import { SelectBoxAlphaPage } from './experiments/select-box-alpha'
+import { ListPage } from './experiments/list-alpha'
 
 // TODO: nice navbar
 const App: React.FC = () => {
   return (
-    <>
-      <Router>
-        <Switch>
-          <Route path="/" exact>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/selectbox-alpha" element={<SelectBoxAlphaPage />}></Route>
+        <Route path="/list-alpha" element={<ListPage />}></Route>
+        <Route
+          path="/"
+          element={
             <nav>
               <ul>
                 <li>
@@ -26,17 +24,11 @@ const App: React.FC = () => {
                 </li>
               </ul>
             </nav>
-          </Route>
-          <Route path="/selectbox-alpha">
-            <SelectBoxAlphaPage />
-          </Route>
-          <Route path="/list-alpha">
-            <ListPage />
-          </Route>
-        </Switch>
-      </Router>
-    </>
-  );
+          }
+        ></Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
