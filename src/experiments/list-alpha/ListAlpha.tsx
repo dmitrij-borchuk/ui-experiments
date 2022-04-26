@@ -3,51 +3,7 @@ import cn from 'classnames'
 import './styles.scss'
 import { FullScreenResizer } from '../../components/resizer'
 
-interface IImageProps {
-}
-export const Image: React.FC<IImageProps> = () => {
-  return (
-    <div className="list-image-alpha rounded-full h-20 w-20 flex-shrink-0" />
-  )
-}
-
-interface IItemProps {
-  text: string;
-  fullHeight?: boolean;
-  className?: string;
-  style?: CSSProperties;
-  onClick?: (event: React.MouseEvent) => void
-}
-export const Item: React.FC<IItemProps> = ((props) => {
-  const { text, onClick, className, style, fullHeight = false } = props
-  return (
-    <div
-      className={cn(className, 'list-item-alpha mb-2 p-3 flex', { 'h-full': fullHeight })}
-      onClick={onClick}
-      style={style}
-    >
-      <Image />
-      <div className="ml-2 color-2 h-20 overflow-hidden leading-relaxed">
-        {text}
-      </div>
-    </div>
-  )
-})
-
-interface IData {
-  text: string;
-  id: number;
-}
-interface ISelectBoxAlphaProps {
-  items: IData[];
-}
-interface IPositioning {
-  top: number;
-  width: number| string;
-  height: number | string;
-  left: number;
-}
-export const ListAlpha: React.FC<ISelectBoxAlphaProps> = (props) => {
+export const ListAlpha = (props: ISelectBoxAlphaProps) => {
   const { items } = props
   const [selectedItem, setSelectedItem] = useState<IData>()
   const [reverse, setReverse] = useState(false)
@@ -59,7 +15,12 @@ export const ListAlpha: React.FC<ISelectBoxAlphaProps> = (props) => {
     setSelectedItem(item)
     setSelectedRect(rect)
   }
-  const onFullScreenAnimEnd = (e: TransitionEvent<HTMLDivElement>, isFullScreen: boolean) => {
+  console.log('=-= selectedItem', selectedItem)
+  const onFullScreenAnimEnd = (
+    e: TransitionEvent<HTMLDivElement>,
+    isFullScreen: boolean
+  ) => {
+    console.log('=-= isFullScreen', isFullScreen)
     if (!isFullScreen) {
       setSelectedItem(undefined)
       setReverse(false)
@@ -69,7 +30,7 @@ export const ListAlpha: React.FC<ISelectBoxAlphaProps> = (props) => {
   return (
     <>
       <div className="list-alpha p-2 overflow-auto">
-        {items.map(item => (
+        {items.map((item) => (
           <Item
             key={item.id}
             text={item.text}
@@ -95,7 +56,53 @@ export const ListAlpha: React.FC<ISelectBoxAlphaProps> = (props) => {
           </FullScreenResizer>
         )}
       </div>
-
     </>
+  )
+}
+
+interface IData {
+  text: string
+  id: number
+}
+interface ISelectBoxAlphaProps {
+  items: IData[]
+}
+
+interface IPositioning {
+  top: number
+  width: number | string
+  height: number | string
+  left: number
+}
+
+interface IImageProps {}
+export const Image: React.FC<IImageProps> = () => {
+  return (
+    <div className="list-image-alpha rounded-full h-20 w-20 flex-shrink-0" />
+  )
+}
+
+interface IItemProps {
+  text: string
+  fullHeight?: boolean
+  className?: string
+  style?: CSSProperties
+  onClick?: (event: React.MouseEvent) => void
+}
+export const Item: React.FC<IItemProps> = (props) => {
+  const { text, onClick, className, style, fullHeight = false } = props
+  return (
+    <div
+      className={cn(className, 'list-item-alpha mb-2 p-3 flex', {
+        'h-full': fullHeight,
+      })}
+      onClick={onClick}
+      style={style}
+    >
+      <Image />
+      <div className="ml-2 color-2 h-20 overflow-hidden leading-relaxed">
+        {text}
+      </div>
+    </div>
   )
 }

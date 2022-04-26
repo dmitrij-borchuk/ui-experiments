@@ -4,22 +4,29 @@ import React, {
   useState,
   TransitionEvent,
   useCallback,
-} from "react";
-import cn from "classnames";
-import "./styles.scss";
+  useMemo,
+} from 'react'
+import cn from 'classnames'
+import './styles.scss'
 
+const fullScreenPositions = {
+  top: '0px',
+  width: '100%',
+  height: '100%',
+  left: '0px',
+}
 interface IFullScreenResizerProps {
-  className?: string;
-  top?: string;
-  left?: string;
-  width?: string;
-  height?: string;
-  reverse?: boolean;
+  className?: string
+  top?: string
+  left?: string
+  width?: string
+  height?: string
+  reverse?: boolean
   onAnimationEnd?: (
     event: TransitionEvent<HTMLDivElement>,
     isFullScreen: boolean
-  ) => void;
-  children?: React.ReactNode;
+  ) => void
+  children?: React.ReactNode
 }
 export const FullScreenResizer: React.FC<IFullScreenResizerProps> = (props) => {
   const {
@@ -31,48 +38,39 @@ export const FullScreenResizer: React.FC<IFullScreenResizerProps> = (props) => {
     height,
     reverse,
     onAnimationEnd = () => {},
-  } = props;
-  const elementRef = useRef<HTMLDivElement>(null);
-  const [animationSemaphore, setAnimationSemaphore] = useState(0);
-  const fullScreenPositions = {
-    top: "0px",
-    width: "100%",
-    height: "100%",
-    left: "0px",
-  };
-  const originalPositions = {
-    top,
-    width,
-    height,
-    left,
-  };
+  } = props
+  const elementRef = useRef<HTMLDivElement>(null)
+  const originalPositions = useMemo(
+    () => ({
+      top,
+      width,
+      height,
+      left,
+    }),
+    [height, left, top, width]
+  )
   const [currentPosition, setCurrentPosition] = useState(
     reverse ? fullScreenPositions : originalPositions
-  );
-  const time = "0.5s";
+  )
+  const time = '0.5s'
   const animationEnd = useCallback(
     (e: TransitionEvent<HTMLDivElement>) => {
-      if (animationSemaphore === 3) {
-        onAnimationEnd(e, !reverse);
-        setAnimationSemaphore(0);
-      } else {
-        setAnimationSemaphore(animationSemaphore + 1);
-      }
+      onAnimationEnd(e, !reverse)
     },
-    [onAnimationEnd, reverse, animationSemaphore]
-  );
+    [onAnimationEnd, reverse]
+  )
 
   useEffect(() => {
-    setCurrentPosition(reverse ? originalPositions : fullScreenPositions);
-  }, [elementRef.current, reverse]);
+    setCurrentPosition(reverse ? originalPositions : fullScreenPositions)
+  }, [originalPositions, reverse])
 
   return (
     <div
       ref={elementRef}
-      className={cn(className, "screen-container")}
+      className={cn(className, 'screen-container')}
       onTransitionEnd={animationEnd}
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: currentPosition.top,
         width: currentPosition.width,
         height: currentPosition.height,
@@ -82,5 +80,5 @@ export const FullScreenResizer: React.FC<IFullScreenResizerProps> = (props) => {
     >
       {children}
     </div>
-  );
-};
+  )
+}
