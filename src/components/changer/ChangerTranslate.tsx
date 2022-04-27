@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, ReactNode } from 'react'
+import React, { useEffect, useState, ReactNode } from 'react'
 import cn from 'classnames'
 import './styles.css'
 
@@ -20,12 +20,7 @@ export const ChangerTranslateDetailed = (
       'translate-up': direction === 'down',
     }),
   )
-  const onTransitionEnd = useCallback(() => {
-    // setSecond(children)
-    // setClasses(['fade-out-reset', 'fade-in-reset', 'fade-out-reset'])
-    // setCurrentAnimation('translate-reset')
-    // setCurrentChildren(children)
-  }, [])
+
   useEffect(() => {
     setClasses(
       cn('transition', {
@@ -42,9 +37,5 @@ export const ChangerTranslateDetailed = (
     )
   }, [direction, fade, noPointer, fadeIn])
 
-  return (
-    <div className={classes} onTransitionEnd={onTransitionEnd}>
-      {children}
-    </div>
-  )
+  return <div className={classes}>{children}</div>
 }

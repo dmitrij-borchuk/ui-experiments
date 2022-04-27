@@ -8,25 +8,30 @@ interface IProps {
   direction: 'up' | 'down'
 }
 export const NumberChanger: React.FC<IProps> = ({ value, direction }) => {
-  const numbers = getNumbersArray(value)
-  const [currentNumbers, setCurrentNumbers] = useState(numbers)
-  const [previousValue, setPreviousValue] = useState(value)
-  const [values, setValues] = useState<string[][]>([])
-
+  const [values, setValues] = useState<{ digits: string[]; id: number }[]>([])
   useEffect(() => {
-    setValues((values) => [...values, getNumbersArray(value)])
+    setValues((values) => {
+      counter += 1
+      return [
+        ...values,
+        {
+          digits: getNumbersArray(value),
+          id: counter,
+        },
+      ].slice(-5)
+    })
   }, [value])
 
   return (
     <div className="flex">
       {values.map((number, valueIndex) => (
-        <div className="flex w-0 justify-center">
-          {number.map((digit, i) => {
+        <div className="flex w-0 justify-center" key={`${number.id}`}>
+          {number.digits.map((digit, i) => {
             const isCurrent = valueIndex === values.length - 1
 
             return (
               <ChangerTranslateDetailed
-                key={i}
+                key={`${number.digits.join()}-${i}`}
                 fade={isCurrent ? 'in' : 'out'}
                 direction={direction}
                 noPointer={!isCurrent}
@@ -42,3 +47,4 @@ export const NumberChanger: React.FC<IProps> = ({ value, direction }) => {
     </div>
   )
 }
+let counter = 0
