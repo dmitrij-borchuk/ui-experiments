@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link, Routes } from 'react-router-dom'
 import './App.css'
 import { SelectBoxAlphaPage } from './experiments/select-box-alpha'
 import { ListPage } from './experiments/list-alpha'
+import { NumberSelectAlphaPage } from './experiments/number-select-alpha'
 
 // TODO: nice navbar
 const App: React.FC = () => {
@@ -11,6 +12,10 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/selectbox-alpha" element={<SelectBoxAlphaPage />}></Route>
         <Route path="/list-alpha" element={<ListPage />}></Route>
+        <Route
+          path="/number-select-alpha"
+          element={<NumberSelectAlphaPage />}
+        />
         <Route
           path="/"
           element={
@@ -21,6 +26,9 @@ const App: React.FC = () => {
                 </li>
                 <li>
                   <Link to="/list-alpha">List Alpha</Link>
+                </li>
+                <li>
+                  <Link to="/number-select-alpha">Number Select Alpha</Link>
                 </li>
               </ul>
             </nav>

@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 
 interface IContainerProps {
-  width: number;
-  height: number;
-  background?: string;
-  children?: React.ReactNode;
+  width: string
+  height: string
+  background?: string
+  children?: React.ReactNode
 }
 export const Container: React.FC<IContainerProps> = ({
   width,
@@ -19,5 +19,5 @@ export const Container: React.FC<IContainerProps> = ({
     >
       {children}
     </div>
-  );
-};
+  )
+}

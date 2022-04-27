@@ -24,7 +24,7 @@ interface IFullScreenResizerProps {
   reverse?: boolean
   onAnimationEnd?: (
     event: TransitionEvent<HTMLDivElement>,
-    isFullScreen: boolean
+    isFullScreen: boolean,
   ) => void
   children?: React.ReactNode
 }
@@ -47,17 +47,17 @@ export const FullScreenResizer: React.FC<IFullScreenResizerProps> = (props) => {
       height,
       left,
     }),
-    [height, left, top, width]
+    [height, left, top, width],
   )
   const [currentPosition, setCurrentPosition] = useState(
-    reverse ? fullScreenPositions : originalPositions
+    reverse ? fullScreenPositions : originalPositions,
   )
   const time = '0.5s'
   const animationEnd = useCallback(
     (e: TransitionEvent<HTMLDivElement>) => {
       onAnimationEnd(e, !reverse)
     },
-    [onAnimationEnd, reverse]
+    [onAnimationEnd, reverse],
   )
 
   useEffect(() => {

@@ -15,7 +15,7 @@ export const ListAlpha = (props: ISelectBoxAlphaProps) => {
   }
   const onFullScreenAnimEnd = (
     e: TransitionEvent<HTMLDivElement>,
-    isFullScreen: boolean
+    isFullScreen: boolean,
   ) => {
     if (!isFullScreen) {
       setSelectedItem(undefined)
@@ -87,7 +87,6 @@ interface IItemProps {
 }
 export const Item: React.FC<IItemProps> = (props) => {
   const { text, onClick, className, style, fullHeight = false } = props
-  console.log('=-= fullHeight', fullHeight)
   return (
     <div
       className={cn(className, 'list-item-alpha mb-2 p-3 flex', {
@@ -100,7 +99,7 @@ export const Item: React.FC<IItemProps> = (props) => {
       <div
         className={cn(
           'ml-2 color-2 h-20 overflow-hidden leading-relaxed',
-          fullHeight ? 'h-full' : 'h-20'
+          fullHeight ? 'h-full' : 'h-20',
         )}
       >
         {text}

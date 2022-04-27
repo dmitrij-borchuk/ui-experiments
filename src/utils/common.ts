@@ -8,3 +8,7 @@ export function getObjByKey<T, K extends keyof T>(key: K, arr: T[]) {
     return acc
   }, {} as Record<string, T>)
 }
+
+export function getNumbersArray(value: number) {
+  return value.toString().split('')
+}
