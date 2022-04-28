@@ -8,7 +8,6 @@ import './styles.css'
 
 // https://www.pinterest.com/pin/140806228654104/
 
-// TODO: fast clicking
 // TODO: range validation
 // TODO: forbid to go out of the range
 // TODO: controlled component

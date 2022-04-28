@@ -1,4 +1,10 @@
-import React, { useRef, useLayoutEffect, useState, useCallback, useMemo } from 'react'
+import React, {
+  useRef,
+  useLayoutEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react'
 import cn from 'classnames'
 import { Arrow } from '../../components/icons'
 import { DIRECTION } from '../../components/icons/Arrow'
@@ -7,16 +13,16 @@ import { getObjByKey } from '../../utils/common'
 import { Changer } from '../../components/changer'
 
 interface IItem {
-  label: string;
-  key: string;
+  label: string
+  key: string
 }
 interface ISelectBoxAlphaProps {
-  width?: number;
-  open?: boolean;
-  value?: string;
-  onOpenChanged?: (state: boolean) => void;
-  onChange?: (value: string | undefined) => void;
-  items: IItem[];
+  width?: number
+  open?: boolean
+  value?: string
+  onOpenChanged?: (state: boolean) => void
+  onChange?: (value: string | undefined) => void
+  items: IItem[]
 }
 // TODO: Inline demo
 // TODO: Items should be shown one after another
@@ -39,22 +45,28 @@ export const SelectBoxAlpha: React.FC<ISelectBoxAlphaProps> = (props) => {
       onOpenChanged(!isOpened)
     }
   }, [isOpened, onOpenChanged])
-  const onItemClick = useCallback((key: string) => {
-    setCurrentKey(key)
-    if (onChange) {
-      onChange(key)
-    }
-  }, [onChange])
-  const onClearClick = useCallback((e: React.MouseEvent) => {
-    if (isOpened) {
-      return
-    }
-    setCurrentKey(undefined)
-    if (onChange) {
-      onChange(undefined)
-    }
-    e.stopPropagation()
-  }, [onChange, isOpened])
+  const onItemClick = useCallback(
+    (key: string) => {
+      setCurrentKey(key)
+      if (onChange) {
+        onChange(key)
+      }
+    },
+    [onChange],
+  )
+  const onClearClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (isOpened) {
+        return
+      }
+      setCurrentKey(undefined)
+      if (onChange) {
+        onChange(undefined)
+      }
+      e.stopPropagation()
+    },
+    [onChange, isOpened],
+  )
 
   useLayoutEffect(() => {
     const { current } = itemsRef
@@ -72,7 +84,6 @@ export const SelectBoxAlpha: React.FC<ISelectBoxAlphaProps> = (props) => {
       onClick={onSelectClick}
     >
       <div className="w-full">
-
         {/* Current value */}
         <div className="selected-value flex items-center px-5">
           <Changer>
@@ -86,7 +97,7 @@ export const SelectBoxAlpha: React.FC<ISelectBoxAlphaProps> = (props) => {
           className="drop-items-container overflow-hidden text-gray-500"
           style={{ height: itemsRef.current ? currentDropHeight : 'auto' }}
         >
-          {items.map(item => (
+          {items.map((item) => (
             <div
               key={item.key}
               className="drop-item hover:bg-gray-100 px-5"
@@ -106,10 +117,18 @@ export const SelectBoxAlpha: React.FC<ISelectBoxAlphaProps> = (props) => {
           className="flex flex-col justify-between h-full"
           onClick={onClearClick}
         >
-          <span className={cn('animate-transform-03', { 'make-clear-icon-top': currentKey })}>
+          <span
+            className={cn('animate-transform-03', {
+              'make-clear-icon-top': currentKey,
+            })}
+          >
             <Arrow />
           </span>
-          <span className={cn('animate-transform-03', { 'make-clear-icon-bottom': currentKey })}>
+          <span
+            className={cn('animate-transform-03', {
+              'make-clear-icon-bottom': currentKey,
+            })}
+          >
             <Arrow direction={DIRECTION.BOTTOM} />
           </span>
         </div>

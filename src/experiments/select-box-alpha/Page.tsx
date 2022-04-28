@@ -9,7 +9,7 @@ const items = ['Facebook', 'Dribbble', 'Twitter'].map((item) => ({
 
 export const SelectBoxAlphaPage = () => {
   return (
-    <Container width={'800px'} height={'600px'} background="#00D3AE">
+    <Container width="100%" height="100%" background="#00D3AE">
       {/* Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. */}
       <div
         style={{ padding: '10px', border: '1px solid black', height: '72px' }}

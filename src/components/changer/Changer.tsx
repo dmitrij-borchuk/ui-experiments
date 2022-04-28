@@ -2,15 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import cn from 'classnames'
 import './styles.css'
 
-export enum ANIMATION {
-  FADE = 'FADE',
-  // RIGHT = 'RIGHT',
-  // BOTTOM = 'BOTTOM',
-  // LEFT = 'LEFT',
-}
-const ANIMATION_TO_CLASS: Record<ANIMATION, string> = {
-  [ANIMATION.FADE]: 'fade',
-}
+export type ANIMATION = 'fade'
 interface IChangerProps {
   animation?: ANIMATION
   // className?: string;
@@ -18,7 +10,7 @@ interface IChangerProps {
 }
 export const Changer: React.FC<IChangerProps> = (props) => {
   const { children, animation } = props
-  const animationClassName = animation ? ANIMATION_TO_CLASS[animation] : ''
+  const animationClassName = animation || ''
   const [currentChildren, setCurrentChildren] = useState(children)
   const [currentAnimation, setCurrentAnimation] = useState('')
   const onAnimationEnd = useCallback(() => {
@@ -37,8 +29,8 @@ export const Changer: React.FC<IChangerProps> = (props) => {
 
   return (
     <div
-      className={cn(animationClassName, currentAnimation)}
-      onAnimationEnd={onAnimationEnd}
+      className={cn('transition', animationClassName, currentAnimation)}
+      onTransitionEnd={onAnimationEnd}
     >
       {currentChildren}
     </div>
