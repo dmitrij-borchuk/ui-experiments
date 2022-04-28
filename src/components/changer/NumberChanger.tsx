@@ -28,12 +28,13 @@ export const NumberChanger: React.FC<IProps> = ({ value, direction }) => {
         <div className="flex w-0 justify-center" key={`${number.id}`}>
           {number.digits.map((digit, i) => {
             const isCurrent = valueIndex === values.length - 1
+            const isOnly = values.length === 1
 
             return (
               <ChangerTranslateDetailed
-                key={`${number.digits.join()}-${i}`}
+                key={`${digit}-${i}`}
                 fade={isCurrent ? 'in' : 'out'}
-                direction={direction}
+                direction={isOnly ? undefined : direction}
                 noPointer={!isCurrent}
               >
                 <div className={cn('flex text-3xl justify-center')}>
