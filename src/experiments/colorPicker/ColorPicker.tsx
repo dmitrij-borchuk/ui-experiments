@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeDropper } from '@fortawesome/free-solid-svg-icons'
 import * as d3 from 'd3'
@@ -12,11 +12,17 @@ type Props = {
   onChange?: (color: string) => void
 }
 export const ColorPicker = (props: Props) => {
+  const { onChange } = props
   const [p, setP] =
     useState<d3.Selection<SVGPathElement, number, d3.BaseType, unknown>>()
   const [open, setOpen] = useState(false)
-  // const svg = useMemo(() => d3
-  // .create('svg'), [])
+  const onColorClick = useCallback(
+    (d: number[], i: number) => {
+      setOpen(false)
+      onChange && onChange(d3.interpolateRainbow(i / n))
+    },
+    [onChange],
+  )
   useEffect(() => {
     const p = d3
       .select('#colors')
@@ -31,25 +37,30 @@ export const ColorPicker = (props: Props) => {
     p.exit().remove()
     setP(p)
   }, [])
-  function onClick() {
-    p?.transition()
+  const onIconClick = useCallback(() => {
+    setOpen((open) => !open)
+  }, [])
+
+  useEffect(() => {
+    if (!p) {
+      return
+    }
+
+    p.transition()
       .duration(500)
-      .attr('d', sectors(40, open ? 41 : 240))
+      .attr('d', sectors(40, open ? 240 : 41))
       .delay((_, i) => i * 50)
 
     if (open) {
-      p?.on('mouseover', null)
-      p?.on('mouseout', null)
+      p.on('mouseover', handleMouseOver)
+      p.on('mouseout', handleMouseOut)
+      p.on('click', onColorClick)
     } else {
-      p?.on('mouseover', handleMouseOver)
-      p?.on('mouseout', handleMouseOut)
+      p.on('mouseover', null)
+      p.on('mouseout', null)
+      p.on('click', null)
     }
-
-    setOpen(!open)
-  }
-
-  // d3.select("body").transition()
-  //   .style("background-color", "black");
+  }, [onColorClick, open, p])
 
   return (
     <div className="relative">
@@ -66,7 +77,7 @@ export const ColorPicker = (props: Props) => {
         }}
       ></svg>
       <button
-        onClick={onClick}
+        onClick={onIconClick}
         className="rounded-full border-2 border-black h-10 w-10 relative"
       >
         <FontAwesomeIcon icon={faEyeDropper} />

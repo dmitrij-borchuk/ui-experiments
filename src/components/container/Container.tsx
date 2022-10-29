@@ -4,6 +4,7 @@ interface IContainerProps {
   width: string
   height: string
   background?: string
+  overflow?: string
   children?: React.ReactNode
 }
 export const Container: React.FC<IContainerProps> = ({
@@ -11,11 +12,12 @@ export const Container: React.FC<IContainerProps> = ({
   height,
   children,
   background,
+  overflow,
 }) => {
   return (
     <div
       className="flex items-center justify-center"
-      style={{ width, height, background }}
+      style={{ width, height, background, overflow }}
     >
       {children}
     </div>
