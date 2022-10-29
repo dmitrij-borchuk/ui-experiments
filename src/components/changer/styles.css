@@ -1,0 +1,14 @@
+.translate-down {
+  transform: translate(0px, 100%);
+}
+
+.translate-up {
+  transform: translate(0px, -100%);
+}
+
+.fade-in {
+  opacity: 1;
+}
+.fade-out {
+  opacity: 0;
+}

@@ -1,0 +1,3 @@
+.scalerScale {
+  transition: transform 0.05s cubic-bezier(0.81, 0, 1, 1);
+}

@@ -1,0 +1,14 @@
+.arrow {
+  border-right: 2px solid #2DAD8F;
+  border-top: 2px solid #2DAD8F;
+  width: 6px;
+  height: 6px;
+}
+
+.arrow.direction-top {
+  transform: rotate(-45deg);
+}
+
+.arrow.direction-bottom {
+  transform: rotate(135deg);
+}
