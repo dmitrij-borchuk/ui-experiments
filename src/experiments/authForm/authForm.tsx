@@ -87,5 +87,5 @@ const mode2submitTransform = {
 const mode2pointerTransform = {
   signIn: 'translate(30px, 0px)',
   signUp: 'translate(122px, 0px)',
-  reset: 'translate(345px, 0px)',
+  reset: 'translate(330px, 0px)',
 }
