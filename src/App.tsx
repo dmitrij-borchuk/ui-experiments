@@ -5,6 +5,7 @@ import { SelectBoxAlphaPage } from './experiments/select-box-alpha'
 import { ListPage } from './experiments/list-alpha'
 import { NumberSelectAlphaPage } from './experiments/number-select-alpha'
 import { ColorPickerPage } from './experiments/colorPicker'
+import { AuthFormPage } from './experiments/authForm/Page'
 
 // TODO: nice navbar
 const App: React.FC = () => {
@@ -17,6 +18,7 @@ const App: React.FC = () => {
           path="/number-select-alpha"
           element={<NumberSelectAlphaPage />}
         />
+        <Route path="/auth-form" element={<AuthFormPage />} />
         <Route path="/color-picker" element={<ColorPickerPage />} />
         <Route
           path="/"
@@ -34,6 +36,9 @@ const App: React.FC = () => {
                 </li>
                 <li>
                   <Link to="/color-picker">Color picker</Link>
+                </li>
+                <li>
+                  <Link to="/auth-form">Auth form</Link>
                 </li>
               </ul>
             </nav>
